@@ -38,10 +38,10 @@ namespace BankovniUcetUkol
         {
             Console.WriteLine("Kolik si prejete vybrat penez?");
             double vybratpenize = Convert.ToDouble(Console.ReadLine());
-            double novyzustatek = Zustatek - vybratpenize;
-            Console.WriteLine($"Vas aktualni zustatek po vybrani {vybratpenize} kc je {novyzustatek} kc");
+            double novyzustatek1 = Zustatek - vybratpenize;
+            Console.WriteLine($"Vas aktualni zustatek po vybrani {vybratpenize} kc je {novyzustatek1} kc");
             Console.WriteLine("-------------------------------");
-            return novyzustatek;
+            return novyzustatek1;
         }
         public double MuzuVybratCastku()
         {
