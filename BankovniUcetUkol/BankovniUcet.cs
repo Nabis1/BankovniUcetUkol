@@ -1,6 +1,4 @@
 ﻿
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Channels;
 
 namespace BankovniUcetUkol
 {
@@ -12,16 +10,12 @@ namespace BankovniUcetUkol
             Jmeno = jmeno;
             Prijmeni = prijmeni;
             Zustatek = zustatek;
-            //ZustatekPoVlozeni = 0; //zustatekPoVlozeni;
-            //ZustatekPoVybrani = 0; //zustatekPoVybrani;
 
         }
 
         public string Jmeno = "David";
         public string Prijmeni = "Pasta";
         public double Zustatek = 0;
-        //public double ZustatekPoVlozeni = 0;
-        //public double ZustatekPoVybrani = 0;
 
         public void Identifikace()
         {
@@ -32,40 +26,55 @@ namespace BankovniUcetUkol
         public double VlozPenize()
         {
             Console.WriteLine("Kolik si prejete vlozit penez?");
-            double vlozitpenize = Convert.ToDouble(Console.ReadLine());
-            double zustatekPoVlozeni = vlozitpenize + Zustatek;
-            Console.WriteLine($"Vas aktualni zustatek po vlozeni {vlozitpenize} kc je {zustatekPoVlozeni} kc");
+            double vlozitPenize = Convert.ToDouble(Console.ReadLine());
+            double zustatekPoVlozeni = vlozitPenize + Zustatek;
+            Zustatek += vlozitPenize;
+            Console.WriteLine($"Vas aktualni zustatek po vlozeni {vlozitPenize} kc je {zustatekPoVlozeni} kc");
             Console.WriteLine("-------------------------------");
             return zustatekPoVlozeni;
         }
         public double VyberPenize()
         {
-            Console.WriteLine("Kolik si prejete vybrat penez?");
-            double vybratpenize = Convert.ToDouble(Console.ReadLine());
-            double novyzustatek1 = Zustatek - vybratpenize;
-            Console.WriteLine($"Vas aktualni zustatek po vybrani {vybratpenize} kc je {novyzustatek1} kc");
-            Console.WriteLine("-------------------------------");
-            return novyzustatek1;
+            Console.WriteLine("Kolik si přejete vybrat peněz?");
+            double vybratPenize = Convert.ToDouble(Console.ReadLine());
+
+            if (vybratPenize >= 0 && Zustatek >= vybratPenize)
+            {
+                Zustatek -= vybratPenize;
+                Console.WriteLine($"Váš aktuální zůstatek po výběru {vybratPenize} Kč je {Zustatek} Kč");
+                Console.WriteLine("-------------------------------");
+            }
+            else if (vybratPenize < 0)
+            {
+                Console.WriteLine("Zadaná částka nemůže být záporná");
+            }
+            else
+            {
+                Console.WriteLine("Nemáte dostatek finančních prostředků k vybrání této částky");
+            }
+
+            return Zustatek;
         }
+    
         public double MuzuVybratCastku()
         {
 
             Console.WriteLine("Zkuste vybrat libovolnou castku");
             double muzuVybratCastku = Convert.ToDouble(Console.ReadLine());
-            if (Zustatek < muzuVybratCastku)
-            {
-                Console.WriteLine("Tuto Castku nemuzete vybrat, nemate dostatek financi");
-
-            }
-            else if (Zustatek > muzuVybratCastku)
+            if (muzuVybratCastku < Zustatek)
             {
                 Console.WriteLine("Tuto castku muzete vybrat");
+
+            }
+            else 
+            {
+                Console.WriteLine("Tuto Castku nemuzete vybrat, nemate dostatek financi");
             }
             return muzuVybratCastku;
         }
         public void VratZustatek()
         {
-            Console.WriteLine($"Vratili jsme vam puvodni zustatek, ktery jste zadal na zacatku, cini {Zustatek}kc");
+            Console.WriteLine($"Vratili jsme vam puvodni zustatek s prvnim vkladem, tzn. {Zustatek}kc");
         }
     }
 }
