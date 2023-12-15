@@ -7,17 +7,21 @@ namespace BankovniUcetUkol
     public class BankovniUcet
     {
         public BankovniUcet(string jmeno, string prijmeni, double zustatek)
+            
         {
             Jmeno = jmeno;
             Prijmeni = prijmeni;
             Zustatek = zustatek;
+            //ZustatekPoVlozeni = 0; //zustatekPoVlozeni;
+            //ZustatekPoVybrani = 0; //zustatekPoVybrani;
 
         }
 
         public string Jmeno = "David";
         public string Prijmeni = "Pasta";
         public double Zustatek = 0;
-
+        //public double ZustatekPoVlozeni = 0;
+        //public double ZustatekPoVybrani = 0;
 
         public void Identifikace()
         {
@@ -29,10 +33,10 @@ namespace BankovniUcetUkol
         {
             Console.WriteLine("Kolik si prejete vlozit penez?");
             double vlozitpenize = Convert.ToDouble(Console.ReadLine());
-            double novyzustatek = vlozitpenize + Zustatek;
-            Console.WriteLine($"Vas aktualni zustatek po vlozeni {vlozitpenize} kc je {novyzustatek} kc");
+            double zustatekPoVlozeni = vlozitpenize + Zustatek;
+            Console.WriteLine($"Vas aktualni zustatek po vlozeni {vlozitpenize} kc je {zustatekPoVlozeni} kc");
             Console.WriteLine("-------------------------------");
-            return novyzustatek;
+            return zustatekPoVlozeni;
         }
         public double VyberPenize()
         {
@@ -61,7 +65,7 @@ namespace BankovniUcetUkol
         }
         public void VratZustatek()
         {
-            Console.WriteLine($"Vratili jsme vam puvodni zustatek kterz jste zadal na zacatku ktery cini {Zustatek}kc");
+            Console.WriteLine($"Vratili jsme vam puvodni zustatek, ktery jste zadal na zacatku, cini {Zustatek}kc");
         }
     }
 }
